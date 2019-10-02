@@ -1,4 +1,4 @@
-name: electric_scoters
+name: escooters
 description: An application for displaying electric kick-scooters positions.
 version: 1.0.0+1
 
@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+  google_maps_flutter: ^0.5.21+6
 
 dev_dependencies:
   flutter_test:

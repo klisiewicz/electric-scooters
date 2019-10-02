@@ -1,4 +1,4 @@
-package pl.karollisiewicz.electric_scoters
+package pl.karollisiewicz.escooters
 
 import android.os.Bundle
 

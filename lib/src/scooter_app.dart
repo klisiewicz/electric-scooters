@@ -1,3 +1,4 @@
+import 'package:escooters/src/map_screen.dart';
 import 'package:flutter/material.dart';
 
 class ScooterApp extends StatelessWidget {
@@ -5,9 +6,7 @@ class ScooterApp extends StatelessWidget {
     return MaterialApp(
       title: 'Electronic Scooter App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: Scaffold(
-        appBar: AppBar(title: Text('E-scooters'),),
-      ),
+      home: MapScreen(),
     );
   }
 }
