@@ -10,7 +10,8 @@ class _$Injector extends Injector {
   void configure() {
     final Container container = Container();
     container.registerFactory((c) => Client());
-    container.registerFactory<ScooterService, ScooterRestService>(
-        (c) => ScooterRestService(c<Client>()));
+    container.registerFactory<ScooterRepository, ScooterRestRepository>(
+        (c) => ScooterRestRepository(c<Client>()));
+    container.registerSingleton((c) => MapBloc(c<ScooterRepository>()));
   }
 }
