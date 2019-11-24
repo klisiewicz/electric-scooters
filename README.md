@@ -1,5 +1,7 @@
 # Electric Scooters
 
+[![Codemagic build status](https://api.codemagic.io/apps/5d9c76247a0a95001b9f45ca/5d9c76247a0a95001b9f45c9/status_badge.svg)](https://codemagic.io/apps/5d9c76247a0a95001b9f45ca/5d9c76247a0a95001b9f45c9/latest_build)
+
 An application for displaying electric kick-scooters positions.
 
 
