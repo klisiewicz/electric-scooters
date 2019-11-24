@@ -45,9 +45,9 @@ class ScooterMap extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       builder: (context) => ScooterDetails(scooter),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(15.0),
+      shape: const RoundedRectangleBorder(
+        borderRadius: const BorderRadius.vertical(
+          top: const Radius.circular(15.0),
         ),
       ),
     );

@@ -34,7 +34,7 @@ void main() {
   void whenLoadingScooters() => mapBloc.loadScooters();
 
   Future<void> thenExpectStates(Iterable<MapState> states) async => expect(
-        mapBloc.state,
+        mapBloc,
         emitsInOrder(states),
       );
 
@@ -90,6 +90,10 @@ void main() {
       Busy(),
       Error(_noScootersError),
     ]);
+  });
+
+  tearDown(() {
+    mapBloc.close();
   });
 }
 

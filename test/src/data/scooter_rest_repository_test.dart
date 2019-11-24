@@ -10,16 +10,16 @@ import 'package:http/testing.dart';
 void main() {
   test('should parse a response when http code is 200', () async {
     // Given:
-    final ScooterRepository scooterService = ScooterRestRepository(
+    final ScooterRepository scooterRepository = ScooterRestRepository(
       MockClient((request) async => _scooter200Response),
     );
 
     // When:
-    final Iterable<Scooter> scooters = await scooterService.findAll();
+    final Iterable<Scooter> scooters = await scooterRepository.findAll();
 
     // Then:
     expect(scooters.isNotEmpty, true);
-    expect(scooters.first, _someScooter);
+    expect(scooters.first, equals(_someScooter));
   });
 
   test('should throw an exception when http code is not 200', () async {

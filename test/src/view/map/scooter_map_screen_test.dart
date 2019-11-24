@@ -16,14 +16,15 @@ void main() {
 
   setUpAll(() {
     mapBloc = MapBlocMock();
+    when(mapBloc.skip(any)).thenAnswer((_) => Stream.empty());
     kiwi.Container().registerInstance<MapBloc, MapBlocMock>(mapBloc);
   });
 
   testWidgets(
     'should display scooter map when in Ready state',
     (WidgetTester tester) async {
-      when(mapBloc.currentState).thenReturn(Ready());
       // Given:
+      when(mapBloc.state).thenReturn(Ready());
       await tester.pumpWidget(makeTestableWidget(child: ScooterMapScreen()));
 
       // Then:
@@ -36,8 +37,8 @@ void main() {
   testWidgets(
     'should display progress indicator when in loading state',
     (WidgetTester tester) async {
-      when(mapBloc.currentState).thenReturn(Busy());
       // Given:
+      when(mapBloc.state).thenReturn(Busy());
       await tester.pumpWidget(makeTestableWidget(child: ScooterMapScreen()));
 
       // Then:
@@ -50,8 +51,8 @@ void main() {
   testWidgets(
     'should display progress indicator when in loading state',
     (WidgetTester tester) async {
-      when(mapBloc.currentState).thenReturn(Error('Something went wrong...'));
       // Given:
+      when(mapBloc.state).thenReturn(Error('Something went wrong...'));
       await tester.pumpWidget(makeTestableWidget(child: ScooterMapScreen()));
       await tester.pump();
       // Then:

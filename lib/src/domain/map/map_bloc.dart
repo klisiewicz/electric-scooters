@@ -12,19 +12,19 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   @override
   MapState get initialState => Ready(Locations.initial());
 
-  void loadScooters() => dispatch(LoadScooters());
+  void loadScooters() => add(LoadScooters());
 
   @override
   Stream<MapState> mapEventToState(MapEvent event) async* {
     if (event is LoadScooters) {
-      yield Busy(currentState.map);
+      yield Busy(state.map);
       try {
         Iterable<ScooterMarker> markers = await _getMarkers();
         yield (markers.isNotEmpty)
-            ? Ready(currentState.map.setScooters(markers))
-            : Error(NoScootersException(), currentState.map);
+            ? Ready(state.map.setScooters(markers))
+            : Error(NoScootersException(), state.map);
       } catch (error) {
-        yield Error(error, currentState.map);
+        yield Error(error, state.map);
       }
     }
   }

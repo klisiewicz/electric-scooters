@@ -34,7 +34,7 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
           return Stack(
             children: <Widget>[
               ScooterMap(state.map),
-              if (state is Busy) LinearProgressIndicator(),
+              if (state is Busy) const LinearProgressIndicator(),
             ],
           );
         },
