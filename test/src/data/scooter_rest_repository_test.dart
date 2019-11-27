@@ -1,7 +1,8 @@
 import 'dart:convert';
 
+import 'package:escooters/src/api/scooter_rest_repository.dart';
+import 'package:escooters/src/domain/location/locations.dart';
 import 'package:escooters/src/domain/scooter/scooter.dart';
-import 'package:escooters/src/api/scooter_rest_data_source.dart';
 import 'package:escooters/src/domain/scooter/scooter_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
@@ -15,11 +16,11 @@ void main() {
     );
 
     // When:
-    final Iterable<Scooter> scooters = await scooterRepository.findAll();
+    final List<ScooterMarker> scooters = await scooterRepository.getAll();
 
     // Then:
     expect(scooters.isNotEmpty, true);
-    expect(scooters.first, equals(_someScooter));
+    expect(scooters.first, equals(ScooterMarker.from(_someScooter)));
   });
 
   test('should throw an exception when http code is not 200', () async {
@@ -29,7 +30,7 @@ void main() {
     );
 
     // Then:
-    expect(() => scooterService.findAll(), throwsException);
+    expect(() => scooterService.getAll(), throwsException);
   });
 }
 

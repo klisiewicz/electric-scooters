@@ -1,9 +1,10 @@
 import 'package:escooters/src/di/injector.dart';
+import 'package:escooters/src/domain/location/locations.dart';
 import 'package:escooters/src/domain/map/map_bloc.dart';
-import 'package:escooters/src/domain/map/map_state.dart';
 import 'package:escooters/src/view/map/scooter_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_patterns/base_list.dart';
 
 class ScooterMapScreen extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
   @override
   void initState() {
     super.initState();
-    _mapBloc.loadScooters();
+    _mapBloc.loadElements();
   }
 
   @override
@@ -27,14 +28,17 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: BlocBuilder<MapBloc, MapState>(
+      body: BlocBuilder<MapBloc, ViewState>(
         bloc: _mapBloc,
         builder: (context, state) {
-          if (state is Error) _showErrorSnackbar(context, state.error);
+          if (state is Failure) _showSnackbar(context, state.error);
           return Stack(
             children: <Widget>[
-              ScooterMap(state.map),
-              if (state is Busy) const LinearProgressIndicator(),
+              ScooterMap(
+                scooters:
+                    state is Success<List<ScooterMarker>> ? state.data : [],
+              ),
+              if (state is Loading) const LinearProgressIndicator(),
             ],
           );
         },
@@ -42,7 +46,7 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
     );
   }
 
-  void _showErrorSnackbar(BuildContext context, dynamic error) {
+  void _showSnackbar(BuildContext context, dynamic error) {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => Scaffold.of(context).showSnackBar(
         SnackBar(
@@ -52,7 +56,7 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
           ),
           action: SnackBarAction(
             label: 'RETRY',
-            onPressed: _mapBloc.loadScooters,
+            onPressed: _mapBloc.loadElements,
           ),
         ),
       ),

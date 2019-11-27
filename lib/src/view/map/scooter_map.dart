@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ScooterMap extends StatelessWidget {
-  final Locations locations;
+  final List<ScooterMarker> scooters;
 
-  const ScooterMap(this.locations, {Key key}) : super(key: key);
+  const ScooterMap({Key key, this.scooters = const []}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +14,14 @@ class ScooterMap extends StatelessWidget {
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
         target: LatLng(
-          locations.camera.latitude,
-          locations.camera.longitude,
+          52.5077671,
+          13.4192038,
         ),
         zoom: 12,
       ),
       myLocationEnabled: true,
       myLocationButtonEnabled: false,
-      markers: locations.scooters
-          .map((scooter) => _toMarker(context, scooter))
-          .toSet(),
+      markers: scooters.map((scooter) => _toMarker(context, scooter)).toSet(),
     );
   }
 
