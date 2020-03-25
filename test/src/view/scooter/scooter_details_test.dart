@@ -1,4 +1,4 @@
-import 'package:escooters/src/domain/location/locations.dart';
+import 'package:escooters/src/domain/scooter/scooter_marker.dart';
 import 'package:escooters/src/view/scooter/scooter_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';

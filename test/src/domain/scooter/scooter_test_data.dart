@@ -1,6 +1,6 @@
-import 'package:escooters/src/domain/scooter/scooter.dart';
+import 'package:escooters/src/api/scooter.dart';
 
-final validScooter = Scooter(
+const validScooter = Scooter(
   id: 1,
   name: '0010',
   description: 'Electric Scooter',
@@ -13,7 +13,7 @@ final validScooter = Scooter(
   currency: '€',
 );
 
-final invalidScooter = Scooter(
+const invalidScooter = Scooter(
   id: null,
   name: '-',
   description: '',

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:escooters/src/api/scooter.dart';
 import 'package:escooters/src/api/scooter_rest_repository.dart';
-import 'package:escooters/src/domain/location/locations.dart';
-import 'package:escooters/src/domain/scooter/scooter.dart';
+import 'package:escooters/src/domain/scooter/scooter_marker.dart';
 import 'package:escooters/src/domain/scooter/scooter_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
@@ -38,7 +38,7 @@ final _scooter200Response = Response(json.encode([_someScooter.toJson()]), 200);
 
 final _scooter404Response = Response(json.encode({}), 404);
 
-final _someScooter = Scooter(
+const _someScooter = Scooter(
   id: 1,
   name: '000011',
   description: 'Electric Scooter',

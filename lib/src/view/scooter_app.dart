@@ -2,6 +2,7 @@ import 'package:escooters/src/view/map/scooter_map_screen.dart';
 import 'package:flutter/material.dart';
 
 class ScooterApp extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Electronic Scooter App',
@@ -15,9 +16,9 @@ class ScooterApp extends StatelessWidget {
           contentTextStyle: TextStyle(
             color: Colors.black,
           ),
-        )
+        ),
       ),
-      home: ScooterMapScreen(),
+      home: const ScooterMapScreen(),
     );
   }
 }

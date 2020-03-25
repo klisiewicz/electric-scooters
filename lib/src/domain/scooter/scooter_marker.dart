@@ -1,44 +1,11 @@
-import 'dart:collection';
-
 import 'package:equatable/equatable.dart';
+import 'package:escooters/src/api/scooter.dart';
 import 'package:escooters/src/domain/location/location.dart';
-import 'package:escooters/src/domain/scooter/scooter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-
-@immutable
-class Locations extends Equatable {
-  static const defaultLocation = const Location(
-    latitude: 52.5077671,
-    longitude: 13.4192038,
-  );
-
-  final Location camera;
-  final Iterable<ScooterMarker> scooters;
-
-  const Locations._internal({
-    @required this.camera,
-    this.scooters = const [],
-  }) : assert(camera != null, 'Camera position must be defined.');
-
-  const Locations.initial() : this._internal(camera: defaultLocation);
-
-  Locations setScooters(Iterable<ScooterMarker> scooters) {
-    return Locations._internal(
-      camera: camera,
-      scooters: UnmodifiableListView(scooters) ?? const [],
-    );
-  }
-
-  @override
-  List<Object> get props => [camera, scooters];
-
-  @override
-  String toString() => '$runtimeType camera: $camera, scooters: $scooters';
-}
 
 @immutable
 class ScooterMarker extends Equatable {
@@ -87,13 +54,21 @@ class ScooterMarker extends Equatable {
 
 @immutable
 class Battery extends Equatable {
-  static const high = 80;
-  static const medium = 50;
-  static const low = 20;
+  static const _high = 80;
+  static const _medium = 50;
+  static const _low = 20;
 
   final String level;
   final IconData icon;
   final Color color;
+
+  factory Battery(int level) {
+    return Battery._internal(
+      level: '$level',
+      icon: level._getIcon(),
+      color: level._getColor(),
+    );
+  }
 
   const Battery._internal({
     this.level,
@@ -101,39 +76,35 @@ class Battery extends Equatable {
     this.color,
   });
 
-  factory Battery(int level) {
-    return Battery._internal(
-      level: '${level.toString()}',
-      icon: _getIconFor(level),
-      color: _getColorFor(level),
-    );
-  }
-
   @override
   List<Object> get props => [level, icon, color];
 
   @override
   String toString() => '$runtimeType $level';
+}
 
-  static IconData _getIconFor(int level) {
-    if (level > high)
-      return CupertinoIcons.battery_full;
-    else if (level > medium)
-      return CupertinoIcons.battery_75_percent;
-    else if (level > low)
-      return CupertinoIcons.battery_25_percent;
-    else
-      return CupertinoIcons.battery_empty;
+extension on int {
+  Color _getColor() {
+    if (this > Battery._high) {
+      return Colors.green;
+    } else if (this > Battery._medium) {
+      return Colors.lightGreen;
+    } else if (this > Battery._low) {
+      return Colors.yellow;
+    } else {
+      return Colors.red;
+    }
   }
 
-  static Color _getColorFor(int level) {
-    if (level > high)
-      return Colors.green;
-    else if (level > medium)
-      return Colors.lightGreen;
-    else if (level > low)
-      return Colors.yellow;
-    else
-      return Colors.red;
+  IconData _getIcon() {
+    if (this > Battery._high) {
+      return CupertinoIcons.battery_full;
+    } else if (this > Battery._medium) {
+      return CupertinoIcons.battery_75_percent;
+    } else if (this > Battery._low) {
+      return CupertinoIcons.battery_25_percent;
+    } else {
+      return CupertinoIcons.battery_empty;
+    }
   }
 }

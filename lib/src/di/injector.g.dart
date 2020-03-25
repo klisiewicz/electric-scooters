@@ -7,6 +7,7 @@ part of 'injector.dart';
 // **************************************************************************
 
 class _$Injector extends Injector {
+  @override
   void configure() {
     final Container container = Container();
     container.registerFactory((c) => Client());

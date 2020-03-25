@@ -9,7 +9,7 @@ void main() {
     'should display Google Maps',
     (WidgetTester tester) async {
       // Given:
-      await tester.pumpWidget(makeTestableWidget(child: ScooterMap()));
+      await tester.pumpWidget(makeTestableWidget(child: const ScooterMap()));
 
       // Then:
       expect(find.byType(GoogleMap), findsOneWidget);

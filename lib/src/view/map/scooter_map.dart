@@ -1,4 +1,4 @@
-import 'package:escooters/src/domain/location/locations.dart';
+import 'package:escooters/src/domain/scooter/scooter_marker.dart';
 import 'package:escooters/src/view/scooter/scooter_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,7 +12,7 @@ class ScooterMap extends StatelessWidget {
   Widget build(BuildContext context) {
     return GoogleMap(
       mapType: MapType.normal,
-      initialCameraPosition: CameraPosition(
+      initialCameraPosition: const CameraPosition(
         target: LatLng(
           52.5077671,
           13.4192038,
@@ -44,8 +44,8 @@ class ScooterMap extends StatelessWidget {
       context: context,
       builder: (context) => ScooterDetails(scooter),
       shape: const RoundedRectangleBorder(
-        borderRadius: const BorderRadius.vertical(
-          top: const Radius.circular(15.0),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(15.0),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:escooters/src/domain/map/map_bloc.dart';
 import 'package:escooters/src/view/map/scooter_map.dart';
 import 'package:escooters/src/view/map/scooter_map_screen.dart';
@@ -9,23 +10,24 @@ import 'package:mockito/mockito.dart';
 
 import '../view_test_util.dart';
 
-class MapBlocMock extends Mock implements MapBloc {}
+class MapBlocMock extends MockBloc<dynamic, ViewState> implements MapBloc {}
 
 void main() {
   MapBloc mapBloc;
 
   setUpAll(() {
     mapBloc = MapBlocMock();
-    when(mapBloc.skip(any)).thenAnswer((_) => Stream.empty());
     kiwi.Container().registerInstance<MapBloc, MapBlocMock>(mapBloc);
   });
 
   testWidgets(
-    'should display scooter map when in Ready state',
+    'should display scooter map when in Initial state',
     (WidgetTester tester) async {
       // Given:
       when(mapBloc.state).thenReturn(Initial());
-      await tester.pumpWidget(makeTestableWidget(child: ScooterMapScreen()));
+      await tester.pumpWidget(
+        makeTestableWidget(child: const ScooterMapScreen()),
+      );
 
       // Then:
       expect(find.byType(ScooterMap), findsOneWidget);
@@ -35,11 +37,13 @@ void main() {
   );
 
   testWidgets(
-    'should display progress indicator when in loading state',
+    'should display progress indicator when in Loading state',
     (WidgetTester tester) async {
       // Given:
       when(mapBloc.state).thenReturn(Loading());
-      await tester.pumpWidget(makeTestableWidget(child: ScooterMapScreen()));
+      await tester.pumpWidget(
+        makeTestableWidget(child: const ScooterMapScreen()),
+      );
 
       // Then:
       expect(find.byType(ScooterMap), findsOneWidget);
@@ -49,12 +53,20 @@ void main() {
   );
 
   testWidgets(
-    'should display progress indicator when in loading state',
+    'should display snackbar when in Error state',
     (WidgetTester tester) async {
       // Given:
-      when(mapBloc.state).thenReturn(Failure('Something went wrong...'));
-      await tester.pumpWidget(makeTestableWidget(child: ScooterMapScreen()));
-      await tester.pump();
+      whenListen(
+        mapBloc,
+        Stream.fromIterable([
+          Initial(),
+          const Failure('Something went wrong...'),
+        ]),
+      );
+      await tester.pumpWidget(
+        makeTestableWidget(child: const ScooterMapScreen()),
+      );
+      await tester.pumpAndSettle();
       // Then:
       expect(find.byType(ScooterMap), findsOneWidget);
       expect(find.byType(LinearProgressIndicator), findsNothing);
