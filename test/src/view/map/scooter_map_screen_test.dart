@@ -10,14 +10,14 @@ import 'package:mockito/mockito.dart';
 
 import '../view_test_util.dart';
 
-class MapBlocMock extends MockBloc<dynamic, ViewState>
+class ScooterMapBlocMock extends MockBloc<dynamic, ViewState>
     implements ScooterMapBloc {}
 
 void main() {
   ScooterMapBloc mapBloc;
 
   setUpAll(() {
-    mapBloc = MapBlocMock();
+    mapBloc = ScooterMapBlocMock();
     kiwi.KiwiContainer().registerInstance<ScooterMapBloc>(mapBloc);
   });
 
