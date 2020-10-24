@@ -13,6 +13,6 @@ class _$Injector extends Injector {
     container.registerFactory((c) => Client());
     container.registerFactory<ScooterRepository>(
         (c) => ScooterRestRepository(c<Client>()));
-    container.registerSingleton((c) => MapBloc(c<ScooterRepository>()));
+    container.registerSingleton((c) => ScooterMapBloc(c<ScooterRepository>()));
   }
 }

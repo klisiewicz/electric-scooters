@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:escooters/src/api/scooter.dart';
-import 'package:escooters/src/api/scooter_rest_repository.dart';
+import 'package:escooters/src/data/scooter.dart';
+import 'package:escooters/src/data/scooter_rest_repository.dart';
 import 'package:escooters/src/domain/scooter/scooter_marker.dart';
 import 'package:escooters/src/domain/scooter/scooter_repository.dart';
 import 'package:flutter_test/flutter_test.dart';

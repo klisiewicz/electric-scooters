@@ -1,7 +1,7 @@
 import 'package:escooters/src/di/injector.dart';
-import 'package:escooters/src/domain/map/map_bloc.dart';
 import 'package:escooters/src/domain/scooter/scooter_marker.dart';
 import 'package:escooters/src/view/map/scooter_map.dart';
+import 'package:escooters/src/view/map/scooter_map_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_patterns/view.dart';
@@ -14,7 +14,7 @@ class ScooterMapScreen extends StatefulWidget {
 }
 
 class _ScooterMapScreenState extends State<ScooterMapScreen> {
-  final MapBloc _mapBloc = inject<MapBloc>();
+  final ScooterMapBloc _mapBloc = inject<ScooterMapBloc>();
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: BlocConsumer<MapBloc, ViewState>(
+      body: BlocConsumer<ScooterMapBloc, ViewState>(
         bloc: _mapBloc,
         listener: (context, state) {
           if (state is Failure) _showSnackbar(context, state.error);

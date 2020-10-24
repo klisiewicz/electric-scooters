@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:escooters/src/api/scooter.dart';
+import 'package:escooters/src/data/scooter.dart';
 import 'package:escooters/src/domain/scooter/scooter_marker.dart';
 import 'package:escooters/src/domain/scooter/scooter_repository.dart';
 import 'package:http/http.dart';
@@ -18,15 +18,14 @@ class ScooterRestRepository implements ScooterRepository {
     final response = await _client.get(_url, headers: {
       HttpHeaders.contentTypeHeader: ContentType.json.value,
     });
-
     if (response.statusCode != HttpStatus.ok) {
       throw Exception('Failed to load scooters');
     }
-
     final List<dynamic> scootersJson =
         json.decode(response.body) as List<dynamic>;
-    final Iterable<Scooter> scooters = scootersJson
-        .map((scooter) => Scooter.fromJson(scooter as Map<String, dynamic>));
+    final Iterable<Scooter> scooters = scootersJson.map(
+      (scooter) => Scooter.fromJson(scooter as Map<String, dynamic>),
+    );
     return scooters.map(_tryToCreateMarker).where(_markerIsNotNull).toList();
   }
 

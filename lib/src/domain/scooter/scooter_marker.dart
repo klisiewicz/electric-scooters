@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:escooters/src/api/scooter.dart';
+import 'package:escooters/src/data/scooter.dart';
 import 'package:escooters/src/domain/location/location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:escooters/src/domain/map/map_bloc.dart';
 import 'package:escooters/src/view/map/scooter_map.dart';
+import 'package:escooters/src/view/map/scooter_map_bloc.dart';
 import 'package:escooters/src/view/map/scooter_map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_patterns/view.dart';
@@ -10,14 +10,15 @@ import 'package:mockito/mockito.dart';
 
 import '../view_test_util.dart';
 
-class MapBlocMock extends MockBloc<dynamic, ViewState> implements MapBloc {}
+class MapBlocMock extends MockBloc<dynamic, ViewState>
+    implements ScooterMapBloc {}
 
 void main() {
-  MapBloc mapBloc;
+  ScooterMapBloc mapBloc;
 
   setUpAll(() {
     mapBloc = MapBlocMock();
-    kiwi.KiwiContainer().registerInstance<MapBloc>(mapBloc);
+    kiwi.KiwiContainer().registerInstance<ScooterMapBloc>(mapBloc);
   });
 
   testWidgets(
