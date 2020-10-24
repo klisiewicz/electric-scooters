@@ -18,5 +18,5 @@ class Location extends Equatable {
   List<Object> get props => [latitude, longitude];
 
   @override
-  String toString() => '$runtimeType($latitude, $longitude)';
+  String toString() => 'Location($latitude, $longitude)';
 }

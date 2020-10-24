@@ -49,7 +49,7 @@ class ScooterMarker extends Equatable {
   List<Object> get props => [id, name, location, price, battery];
 
   @override
-  String toString() => '$runtimeType: $name $location';
+  String toString() => 'ScooterMarker: $name $location';
 }
 
 @immutable
@@ -80,7 +80,7 @@ class Battery extends Equatable {
   List<Object> get props => [level, icon, color];
 
   @override
-  String toString() => '$runtimeType $level';
+  String toString() => 'Battery $level';
 }
 
 extension on int {

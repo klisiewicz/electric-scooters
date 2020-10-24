@@ -14,6 +14,7 @@ const validScooter = Scooter(
 );
 
 const invalidScooter = Scooter(
+  // ignore: avoid_redundant_argument_values
   id: null,
   name: '-',
   description: '',
@@ -23,5 +24,6 @@ const invalidScooter = Scooter(
   timestamp: 'not-valid-timestamp',
   price: -100,
   priceTime: 0,
+  // ignore: avoid_redundant_argument_values
   currency: null,
 );

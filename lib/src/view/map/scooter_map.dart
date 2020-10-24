@@ -11,7 +11,6 @@ class ScooterMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      mapType: MapType.normal,
       initialCameraPosition: const CameraPosition(
         target: LatLng(
           52.5077671,

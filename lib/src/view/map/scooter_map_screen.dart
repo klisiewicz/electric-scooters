@@ -4,7 +4,7 @@ import 'package:escooters/src/domain/scooter/scooter_marker.dart';
 import 'package:escooters/src/view/map/scooter_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_patterns/base_list.dart';
+import 'package:flutter_bloc_patterns/view.dart';
 
 class ScooterMapScreen extends StatefulWidget {
   const ScooterMapScreen({Key key}) : super(key: key);

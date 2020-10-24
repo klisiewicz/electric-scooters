@@ -3,15 +3,15 @@
 part of 'injector.dart';
 
 // **************************************************************************
-// InjectorGenerator
+// KiwiInjectorGenerator
 // **************************************************************************
 
 class _$Injector extends Injector {
   @override
   void configure() {
-    final Container container = Container();
+    final KiwiContainer container = KiwiContainer();
     container.registerFactory((c) => Client());
-    container.registerFactory<ScooterRepository, ScooterRestRepository>(
+    container.registerFactory<ScooterRepository>(
         (c) => ScooterRestRepository(c<Client>()));
     container.registerSingleton((c) => MapBloc(c<ScooterRepository>()));
   }

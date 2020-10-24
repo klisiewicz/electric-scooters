@@ -1,6 +1,6 @@
 import 'package:escooters/src/api/scooter_rest_repository.dart';
-import 'package:escooters/src/domain/scooter/scooter_repository.dart';
 import 'package:escooters/src/domain/map/map_bloc.dart';
+import 'package:escooters/src/domain/scooter/scooter_repository.dart';
 import 'package:http/http.dart';
 import 'package:kiwi/kiwi.dart';
 
@@ -13,6 +13,6 @@ abstract class Injector {
   void configure();
 }
 
-T inject<T>([String name]) => Container().resolve<T>(name);
+T inject<T>([String name]) => KiwiContainer().resolve<T>(name);
 
 void injectDependencies() => _$Injector().configure();
