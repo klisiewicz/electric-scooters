@@ -33,7 +33,7 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
       body: BlocConsumer<ScooterMapBloc, ViewState>(
         bloc: _mapBloc,
         listener: (context, state) {
-          if (state is Failure) _showSnackbar(context, state.error);
+          if (state is Failure) _showSnackbar(state.error);
         },
         builder: (context, state) {
           return Stack(
@@ -47,12 +47,12 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
     );
   }
 
-  void _showSnackbar(BuildContext context, dynamic error) {
-    Scaffold.of(context).showSnackBar(
+  void _showSnackbar(dynamic error) {
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(error.toString()),
+          child: Text('$error'),
         ),
         action: SnackBarAction(
           label: 'RETRY',

@@ -8,8 +8,10 @@ class ScooterApp extends StatelessWidget {
       title: 'Electronic Scooter App',
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor: Colors.white,
-        accentColor: Colors.green,
+        colorScheme: const ColorScheme.light(
+          primary: Colors.black,
+          secondary: Colors.green,
+        ),
         snackBarTheme: const SnackBarThemeData(
           backgroundColor: Colors.white,
           actionTextColor: Colors.green,

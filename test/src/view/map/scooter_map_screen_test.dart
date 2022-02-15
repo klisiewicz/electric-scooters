@@ -3,20 +3,32 @@ import 'package:escooters/src/view/map/scooter_map.dart';
 import 'package:escooters/src/view/map/scooter_map_bloc.dart';
 import 'package:escooters/src/view/map/scooter_map_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_patterns/base_list.dart';
 import 'package:flutter_bloc_patterns/view.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kiwi/kiwi.dart' as kiwi;
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../view_test_util.dart';
 
-class ScooterMapBlocMock extends MockBloc<dynamic, ViewState>
+class ScooterMapBlocMock extends MockBloc<ListEvent, ViewState>
     implements ScooterMapBloc {}
+
+// ignore: avoid_implementing_value_types
+class ViewStateFake extends Fake implements ViewState {}
+
+// ignore: avoid_implementing_value_types
+class ListEventFake extends Fake implements ListEvent {}
 
 void main() {
   ScooterMapBloc mapBloc;
 
   setUpAll(() {
+    registerFallbackValue(ViewStateFake());
+    registerFallbackValue(ListEventFake());
+  });
+
+  setUp(() {
     mapBloc = ScooterMapBlocMock();
     kiwi.KiwiContainer().registerInstance<ScooterMapBloc>(mapBloc);
   });
@@ -25,7 +37,7 @@ void main() {
     'should display scooter map when in Initial state',
     (WidgetTester tester) async {
       // Given:
-      when(mapBloc.state).thenReturn(const Initial());
+      when(() => mapBloc.state).thenReturn(const Initial());
       await tester.pumpWidget(
         makeTestableWidget(child: const ScooterMapScreen()),
       );
@@ -41,7 +53,7 @@ void main() {
     'should display progress indicator when in Loading state',
     (WidgetTester tester) async {
       // Given:
-      when(mapBloc.state).thenReturn(const Loading());
+      when(() => mapBloc.state).thenReturn(const Loading());
       await tester.pumpWidget(
         makeTestableWidget(child: const ScooterMapScreen()),
       );
@@ -74,4 +86,8 @@ void main() {
       expect(find.byType(SnackBar), findsOneWidget);
     },
   );
+
+  tearDown(() {
+    kiwi.KiwiContainer().clear();
+  });
 }

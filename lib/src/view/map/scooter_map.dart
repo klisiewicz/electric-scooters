@@ -6,7 +6,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class ScooterMap extends StatelessWidget {
   final List<ScooterMarker> scooters;
 
-  const ScooterMap({Key key, this.scooters = const []}) : super(key: key);
+  const ScooterMap({
+    Key key,
+    this.scooters = const [],
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

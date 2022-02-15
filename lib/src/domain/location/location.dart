@@ -9,10 +9,14 @@ class Location extends Equatable {
   const Location({
     @required this.latitude,
     @required this.longitude,
-  })  : assert(latitude != null && latitude >= -90 && latitude <= 90,
-            'Latitude is must be in an interval from -90.0 to +90.0'),
-        assert(longitude != null && longitude >= -180 && latitude <= 180,
-            'Longitude is must be in an interval from -180.0 to +180.0');
+  })  : assert(
+          latitude != null && latitude >= -90 && latitude <= 90,
+          'Latitude is must be in an interval from -90.0 to +90.0',
+        ),
+        assert(
+          longitude != null && longitude >= -180 && latitude <= 180,
+          'Longitude is must be in an interval from -180.0 to +180.0',
+        );
 
   @override
   List<Object> get props => [latitude, longitude];

@@ -7,17 +7,24 @@ import 'package:escooters/src/domain/scooter/scooter_repository.dart';
 import 'package:http/http.dart';
 
 class ScooterRestRepository implements ScooterRepository {
-  static const _url =
-      'http://my-json-server.typicode.com/FlashScooters/Challenge/vehicles';
+  static final _uri = Uri(
+    scheme: 'http',
+    host: 'my-json-server.typicode.com',
+    path: 'FlashScooters/Challenge/vehicles',
+  );
+
   final Client _client;
 
   ScooterRestRepository(this._client) : assert(_client != null);
 
   @override
   Future<List<ScooterMarker>> getAll() async {
-    final response = await _client.get(_url, headers: {
-      HttpHeaders.contentTypeHeader: ContentType.json.value,
-    });
+    final response = await _client.get(
+      _uri,
+      headers: {
+        HttpHeaders.contentTypeHeader: ContentType.json.value,
+      },
+    );
     if (response.statusCode != HttpStatus.ok) {
       throw Exception('Failed to load scooters');
     }
