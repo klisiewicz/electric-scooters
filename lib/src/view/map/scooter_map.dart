@@ -20,33 +20,35 @@ class ScooterMap extends StatelessWidget {
       ),
       myLocationEnabled: true,
       myLocationButtonEnabled: false,
-      markers: scooters.map((scooter) => _toMarker(context, scooter)).toSet(),
+      markers: scooters.map((scooter) => scooter.toMarker(context)).toSet(),
     );
   }
+}
 
-  Marker _toMarker(BuildContext context, Scooter scooter) {
+extension on Scooter {
+  Marker toMarker(BuildContext context) {
     return Marker(
-      markerId: MarkerId(scooter.id),
+      markerId: MarkerId(id),
       position: LatLng(
-        scooter.location.latitude,
-        scooter.location.longitude,
+        location.latitude,
+        location.longitude,
       ),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       onTap: () {
-        _showScooterDetails(context, scooter);
+        _showScooterDetails(context, this);
       },
     );
   }
+}
 
-  void _showScooterDetails(BuildContext context, Scooter scooter) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => ScooterDetails(scooter),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(15.0),
-        ),
+void _showScooterDetails(BuildContext context, Scooter scooter) {
+  showModalBottomSheet(
+    context: context,
+    builder: (context) => ScooterDetails(scooter),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(15.0),
       ),
-    );
-  }
+    ),
+  );
 }
