@@ -42,7 +42,7 @@ extension on Battery {
       case Battery.high:
         return Colors.green;
       case Battery.medium:
-        return Colors.yellow;
+        return Colors.lightGreen;
       case Battery.low:
         return Colors.redAccent;
       case Battery.empty:
