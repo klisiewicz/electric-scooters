@@ -1,4 +1,5 @@
 import 'package:escooters/src/domain/scooter_marker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ScooterDetails extends StatelessWidget {
@@ -32,5 +33,35 @@ class ScooterDetails extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+extension on Battery {
+  Color get color {
+    switch (this) {
+      case Battery.high:
+        return Colors.green;
+      case Battery.medium:
+        return Colors.yellow;
+      case Battery.low:
+        return Colors.redAccent;
+      case Battery.empty:
+        return Colors.red;
+      default:
+        return Colors.transparent;
+    }
+  }
+
+  IconData get icon {
+    switch (this) {
+      case Battery.high:
+        return CupertinoIcons.battery_100;
+      case Battery.medium:
+        return CupertinoIcons.battery_75_percent;
+      case Battery.low:
+        return CupertinoIcons.battery_25;
+      default:
+        return CupertinoIcons.battery_0;
+    }
   }
 }

@@ -1,9 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:escooters/src/domain/location.dart';
 import 'package:escooters/src/domain/scooter.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 class ScooterMarker extends Equatable {
@@ -33,7 +32,7 @@ class ScooterMarker extends Equatable {
         longitude: scooter.longitude,
       ),
       price: '${scooter.price} ${scooter.currency} / ${scooter.priceTime} min',
-      battery: Battery(scooter.batteryLevel),
+      battery: scooter.batteryLevel.toBattery(),
       timeStamp: DateFormat.yMd().add_jm().format(
             DateTime.parse(scooter.timestamp),
           ),
@@ -47,59 +46,18 @@ class ScooterMarker extends Equatable {
   String toString() => 'ScooterMarker: $name $location, $price';
 }
 
-@immutable
-class Battery extends Equatable {
-  static const _high = 80;
-  static const _medium = 50;
-  static const _low = 20;
-
-  final String level;
-  final IconData icon;
-  final Color color;
-
-  factory Battery(int level) {
-    return Battery._internal(
-      level: '$level',
-      icon: level._getIcon(),
-      color: level._getColor(),
-    );
-  }
-
-  const Battery._internal({
-    required this.level,
-    required this.icon,
-    required this.color,
-  });
-
-  @override
-  List<Object> get props => [level, icon, color];
-
-  @override
-  String toString() => 'Battery $level';
-}
+enum Battery { high, low, medium, empty }
 
 extension on int {
-  Color _getColor() {
-    if (this > Battery._high) {
-      return Colors.green;
-    } else if (this > Battery._medium) {
-      return Colors.lightGreen;
-    } else if (this > Battery._low) {
-      return Colors.yellow;
+  Battery toBattery() {
+    if (this >= 80) {
+      return Battery.high;
+    } else if (this >= 40) {
+      return Battery.medium;
+    } else if (this >= 10) {
+      return Battery.low;
     } else {
-      return Colors.red;
-    }
-  }
-
-  IconData _getIcon() {
-    if (this > Battery._high) {
-      return CupertinoIcons.battery_full;
-    } else if (this > Battery._medium) {
-      return CupertinoIcons.battery_75_percent;
-    } else if (this > Battery._low) {
-      return CupertinoIcons.battery_25_percent;
-    } else {
-      return CupertinoIcons.battery_empty;
+      return Battery.empty;
     }
   }
 }

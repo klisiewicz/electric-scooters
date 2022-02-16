@@ -60,5 +60,7 @@ final _scooterJson = {
 final _scooter404Response = Response(
   json.encode({}),
   404,
-  headers: {HttpHeaders.contentTypeHeader: ContentType.json.value},
+  headers: {
+    HttpHeaders.contentTypeHeader: '${ContentType.json}',
+  },
 );
