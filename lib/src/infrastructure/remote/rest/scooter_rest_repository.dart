@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:escooters/src/data/scooter.dart';
-import 'package:escooters/src/domain/scooter/scooter_marker.dart';
-import 'package:escooters/src/domain/scooter/scooter_repository.dart';
+import 'package:escooters/src/domain/scooter.dart';
+import 'package:escooters/src/domain/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter_repository.dart';
 import 'package:http/http.dart';
 
 class ScooterRestRepository implements ScooterRepository {

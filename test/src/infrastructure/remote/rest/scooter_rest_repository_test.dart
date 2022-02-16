@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:escooters/src/data/scooter_rest_repository.dart';
-import 'package:escooters/src/domain/scooter/scooter_marker.dart';
-import 'package:escooters/src/domain/scooter/scooter_repository.dart';
+import 'package:escooters/src/domain/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter_repository.dart';
+import 'package:escooters/src/infrastructure/remote/rest/scooter_rest_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:http/testing.dart';
 
-import '../domain/scooter/scooter_test_data.dart';
+import '../../../domain/scooter_test_data.dart';
 
 void main() {
   test('should parse a response when http code is 200', () async {

@@ -1,4 +1,4 @@
-import 'package:escooters/src/domain/scooter/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter_marker.dart';
 import 'package:flutter/material.dart';
 
 class ScooterDetails extends StatelessWidget {

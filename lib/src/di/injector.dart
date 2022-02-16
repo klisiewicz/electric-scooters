@@ -1,5 +1,5 @@
-import 'package:escooters/src/data/scooter_rest_repository.dart';
-import 'package:escooters/src/domain/scooter/scooter_repository.dart';
+import 'package:escooters/src/domain/scooter_repository.dart';
+import 'package:escooters/src/infrastructure/remote/rest/scooter_rest_repository.dart';
 import 'package:escooters/src/view/map/scooter_map_bloc.dart';
 import 'package:http/http.dart';
 import 'package:kiwi/kiwi.dart';

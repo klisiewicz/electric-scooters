@@ -1,5 +1,5 @@
 import 'package:escooters/src/di/injector.dart';
-import 'package:escooters/src/domain/scooter/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter_marker.dart';
 import 'package:escooters/src/view/map/scooter_map.dart';
 import 'package:escooters/src/view/map/scooter_map_bloc.dart';
 import 'package:flutter/material.dart';

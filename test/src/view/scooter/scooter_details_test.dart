@@ -1,9 +1,9 @@
-import 'package:escooters/src/domain/scooter/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter_marker.dart';
 import 'package:escooters/src/view/scooter/scooter_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../domain/scooter/scooter_test_data.dart';
+import '../../domain/scooter_test_data.dart';
 import '../view_test_util.dart';
 
 void main() {

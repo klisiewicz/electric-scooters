@@ -1,4 +1,4 @@
-import 'package:escooters/src/data/scooter.dart';
+import 'package:escooters/src/domain/scooter.dart';
 
 const validScooter = Scooter(
   id: 1,

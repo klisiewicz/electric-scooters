@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'scooter.g.dart';
+part '../domain/scooter.g.dart';
 
 @immutable
 @JsonSerializable()
@@ -28,7 +28,7 @@ class Scooter extends Equatable {
     required this.timestamp,
     required this.price,
     required this.priceTime,
-    required  this.currency,
+    required this.currency,
   });
 
   factory Scooter.fromJson(Map<String, dynamic> json) =>
