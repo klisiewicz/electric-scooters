@@ -6,7 +6,7 @@ class ScooterDetails extends StatelessWidget {
 
   const ScooterDetails(
     this.scooter, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

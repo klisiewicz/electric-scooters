@@ -15,34 +15,23 @@ class ScooterRestRepository implements ScooterRepository {
 
   final Client _client;
 
-  ScooterRestRepository(this._client) : assert(_client != null);
+  ScooterRestRepository(this._client);
 
   @override
   Future<List<ScooterMarker>> getAll() async {
     final response = await _client.get(
       _uri,
       headers: {
-        HttpHeaders.contentTypeHeader: ContentType.json.value,
+        HttpHeaders.contentTypeHeader: '${ContentType.json}',
       },
     );
     if (response.statusCode != HttpStatus.ok) {
       throw Exception('Failed to load scooters');
     }
-    final List<dynamic> scootersJson =
-        json.decode(response.body) as List<dynamic>;
-    final Iterable<Scooter> scooters = scootersJson.map(
+    final scootersJson = json.decode(response.body) as List<dynamic>;
+    final scooters = scootersJson.map(
       (scooter) => Scooter.fromJson(scooter as Map<String, dynamic>),
     );
-    return scooters.map(_tryToCreateMarker).where(_markerIsNotNull).toList();
+    return scooters.map((scooter) => ScooterMarker.from(scooter)).toList();
   }
-
-  static ScooterMarker _tryToCreateMarker(Scooter scooter) {
-    try {
-      return ScooterMarker.from(scooter);
-    } catch (_) {
-      return null;
-    }
-  }
-
-  static bool _markerIsNotNull(marker) => marker != null;
 }

@@ -7,7 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_patterns/view.dart';
 
 class ScooterMapScreen extends StatefulWidget {
-  const ScooterMapScreen({Key key}) : super(key: key);
+  const ScooterMapScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _ScooterMapScreenState createState() => _ScooterMapScreenState();

@@ -21,7 +21,7 @@ class ViewStateFake extends Fake implements ViewState {}
 class ListEventFake extends Fake implements ListEvent {}
 
 void main() {
-  ScooterMapBloc mapBloc;
+  late ScooterMapBloc mapBloc;
 
   setUpAll(() {
     registerFallbackValue(ViewStateFake());
@@ -34,60 +34,84 @@ void main() {
   });
 
   testWidgets(
-    'should display scooter map when in Initial state',
+    'should display scooter map when in $Initial state',
     (WidgetTester tester) async {
       // Given:
       when(() => mapBloc.state).thenReturn(const Initial());
-      await tester.pumpWidget(
-        makeTestableWidget(child: const ScooterMapScreen()),
-      );
+      await tester.pumpScooterMapScreen();
 
       // Then:
-      expect(find.byType(ScooterMap), findsOneWidget);
-      expect(find.byType(LinearProgressIndicator), findsNothing);
-      expect(find.byType(SnackBar), findsNothing);
+      thenMapIsDisplayed();
+      thenNoProgressIndicatorIsDisplayed();
+      thenNoSnackBarIsDisplayed();
     },
   );
 
   testWidgets(
-    'should display progress indicator when in Loading state',
+    'should display progress indicator when in $Loading state',
     (WidgetTester tester) async {
       // Given:
       when(() => mapBloc.state).thenReturn(const Loading());
-      await tester.pumpWidget(
-        makeTestableWidget(child: const ScooterMapScreen()),
-      );
+      await tester.pumpScooterMapScreen();
 
       // Then:
-      expect(find.byType(ScooterMap), findsOneWidget);
-      expect(find.byType(LinearProgressIndicator), findsOneWidget);
-      expect(find.byType(SnackBar), findsNothing);
+      thenMapIsDisplayed();
+      thenProgressIndicatorIsDisplayed();
+      thenNoSnackBarIsDisplayed();
     },
   );
 
   testWidgets(
-    'should display snackbar when in Error state',
+    'should display snackbar when in $Failure state',
     (WidgetTester tester) async {
       // Given:
       whenListen(
         mapBloc,
-        Stream.fromIterable([
-          const Initial(),
-          const Failure('Something went wrong...'),
-        ]),
+        Stream.fromIterable(
+          const [
+            Loading(),
+            Failure('Something went wrong...'),
+          ],
+        ),
+        initialState: const Initial(),
       );
-      await tester.pumpWidget(
-        makeTestableWidget(child: const ScooterMapScreen()),
-      );
+      await tester.pumpScooterMapScreen();
       await tester.pumpAndSettle();
+
       // Then:
-      expect(find.byType(ScooterMap), findsOneWidget);
-      expect(find.byType(LinearProgressIndicator), findsNothing);
-      expect(find.byType(SnackBar), findsOneWidget);
+      thenMapIsDisplayed();
+      thenNoProgressIndicatorIsDisplayed();
+      thenSnackBarIsDisplayed();
     },
   );
 
   tearDown(() {
     kiwi.KiwiContainer().clear();
   });
+}
+
+void thenMapIsDisplayed() {
+  expect(find.byType(ScooterMap), findsOneWidget);
+}
+
+void thenProgressIndicatorIsDisplayed() {
+  expect(find.byType(LinearProgressIndicator), findsOneWidget);
+}
+
+void thenNoProgressIndicatorIsDisplayed() {
+  expect(find.byType(LinearProgressIndicator), findsNothing);
+}
+
+void thenSnackBarIsDisplayed() {
+  expect(find.byType(SnackBar), findsOneWidget);
+}
+
+void thenNoSnackBarIsDisplayed() {
+  expect(find.byType(SnackBar), findsNothing);
+}
+
+extension on WidgetTester {
+  Future<void> pumpScooterMapScreen() async {
+    await pumpWidget(makeTestableWidget(child: const ScooterMapScreen()));
+  }
 }

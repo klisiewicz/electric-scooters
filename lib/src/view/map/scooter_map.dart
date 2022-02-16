@@ -7,18 +7,15 @@ class ScooterMap extends StatelessWidget {
   final List<ScooterMarker> scooters;
 
   const ScooterMap({
-    Key key,
     this.scooters = const [],
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
       initialCameraPosition: const CameraPosition(
-        target: LatLng(
-          52.5077671,
-          13.4192038,
-        ),
+        target: LatLng(52.5077671, 13.4192038),
         zoom: 12,
       ),
       myLocationEnabled: true,

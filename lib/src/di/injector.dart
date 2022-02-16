@@ -13,6 +13,6 @@ abstract class Injector {
   void configure();
 }
 
-T inject<T>([String name]) => KiwiContainer().resolve<T>(name);
+T inject<T>([String? name]) => KiwiContainer().resolve<T>(name);
 
 void injectDependencies() => _$Injector().configure();

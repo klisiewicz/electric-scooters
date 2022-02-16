@@ -12,18 +12,3 @@ const validScooter = Scooter(
   priceTime: 60,
   currency: '€',
 );
-
-const invalidScooter = Scooter(
-  // ignore: avoid_redundant_argument_values
-  id: null,
-  name: '-',
-  description: '',
-  latitude: 200,
-  longitude: 400,
-  batteryLevel: 150,
-  timestamp: 'not-valid-timestamp',
-  price: -100,
-  priceTime: 0,
-  // ignore: avoid_redundant_argument_values
-  currency: null,
-);

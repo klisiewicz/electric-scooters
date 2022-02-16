@@ -15,16 +15,13 @@ class ScooterMarker extends Equatable {
   final String timeStamp;
 
   const ScooterMarker({
-    @required this.id,
-    @required this.name,
-    @required this.location,
-    @required this.battery,
+    required this.id,
+    required this.name,
+    required this.location,
+    required this.battery,
     this.price = '',
     this.timeStamp = '',
-  })  : assert(id != null),
-        assert(name != null),
-        assert(location != null),
-        assert(battery != null);
+  });
 
   factory ScooterMarker.from(Scooter scooter) {
     return ScooterMarker(
@@ -47,7 +44,7 @@ class ScooterMarker extends Equatable {
   List<Object> get props => [id, name, location, price, battery];
 
   @override
-  String toString() => 'ScooterMarker: $name $location';
+  String toString() => 'ScooterMarker: $name $location, $price';
 }
 
 @immutable
@@ -69,9 +66,9 @@ class Battery extends Equatable {
   }
 
   const Battery._internal({
-    this.level,
-    this.icon,
-    this.color,
+    required this.level,
+    required this.icon,
+    required this.color,
   });
 
   @override

@@ -19,22 +19,20 @@ class Scooter extends Equatable {
   final String currency;
 
   const Scooter({
-    this.id,
-    this.name,
-    this.description,
-    this.latitude,
-    this.longitude,
-    this.batteryLevel,
-    this.timestamp,
-    this.price,
-    this.priceTime,
-    this.currency,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.latitude,
+    required this.longitude,
+    required this.batteryLevel,
+    required this.timestamp,
+    required this.price,
+    required this.priceTime,
+    required  this.currency,
   });
 
   factory Scooter.fromJson(Map<String, dynamic> json) =>
       _$ScooterFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ScooterToJson(this);
 
   @override
   List<Object> get props => [

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget makeTestableWidget({Widget child}) => MaterialApp(
-  home: Material(child: child),
-);
+Widget makeTestableWidget({
+  required Widget child,
+}) {
+  return MaterialApp(home: Material(child: child));
+}

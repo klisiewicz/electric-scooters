@@ -10,9 +10,10 @@ class _$Injector extends Injector {
   @override
   void configure() {
     final KiwiContainer container = KiwiContainer();
-    container.registerFactory((c) => Client());
-    container.registerFactory<ScooterRepository>(
-        (c) => ScooterRestRepository(c<Client>()));
-    container.registerSingleton((c) => ScooterMapBloc(c<ScooterRepository>()));
+    container
+      ..registerFactory((c) => Client())
+      ..registerFactory<ScooterRepository>(
+          (c) => ScooterRestRepository(c<Client>()))
+      ..registerSingleton((c) => ScooterMapBloc(c<ScooterRepository>()));
   }
 }
