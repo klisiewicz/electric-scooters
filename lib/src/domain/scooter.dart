@@ -1,50 +1,30 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
-
-part '../domain/scooter.g.dart';
+import 'package:escooters/src/domain/location.dart';
+import 'package:meta/meta.dart';
 
 @immutable
-@JsonSerializable()
 class Scooter extends Equatable {
-  final int id;
+  final String id;
   final String name;
-  final String description;
-  final double latitude;
-  final double longitude;
-  final int batteryLevel;
-  final String timestamp;
-  final int price;
-  final int priceTime;
-  final String currency;
+  final Location location;
+  final String price;
+  final Battery battery;
+  final String timeStamp;
 
   const Scooter({
     required this.id,
     required this.name,
-    required this.description,
-    required this.latitude,
-    required this.longitude,
-    required this.batteryLevel,
-    required this.timestamp,
-    required this.price,
-    required this.priceTime,
-    required this.currency,
+    required this.location,
+    required this.battery,
+    this.price = '',
+    this.timeStamp = '',
   });
 
-  factory Scooter.fromJson(Map<String, dynamic> json) =>
-      _$ScooterFromJson(json);
+  @override
+  List<Object> get props => [id, name, location, price, battery];
 
   @override
-  List<Object> get props => [
-        id,
-        name,
-        description,
-        latitude,
-        longitude,
-        batteryLevel,
-        timestamp,
-        price,
-        priceTime,
-        currency
-      ];
+  String toString() => 'ScooterMarker: $name $location, $price';
 }
+
+enum Battery { high, low, medium, empty }

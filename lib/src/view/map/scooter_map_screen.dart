@@ -1,5 +1,5 @@
 import 'package:escooters/src/di/injector.dart';
-import 'package:escooters/src/domain/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter.dart';
 import 'package:escooters/src/view/map/scooter_map.dart';
 import 'package:escooters/src/view/map/scooter_map_bloc.dart';
 import 'package:flutter/material.dart';
@@ -66,8 +66,8 @@ class _ScooterMapScreenState extends State<ScooterMapScreen> {
 }
 
 extension _ViewStateExt on ViewState {
-  List<ScooterMarker> getScooterMarkers() =>
-      this is Success<List<ScooterMarker>>
-          ? (this as Success<List<ScooterMarker>>).data
+  List<Scooter> getScooterMarkers() =>
+      this is Success<List<Scooter>>
+          ? (this as Success<List<Scooter>>).data
           : [];
 }

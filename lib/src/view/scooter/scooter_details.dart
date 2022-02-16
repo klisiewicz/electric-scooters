@@ -1,9 +1,9 @@
-import 'package:escooters/src/domain/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ScooterDetails extends StatelessWidget {
-  final ScooterMarker scooter;
+  final Scooter scooter;
 
   const ScooterDetails(
     this.scooter, {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:escooters/src/domain/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter.dart';
 import 'package:escooters/src/domain/scooter_repository.dart';
 import 'package:escooters/src/infrastructure/remote/rest/scooter_converter.dart';
 import 'package:http/http.dart';
@@ -19,7 +19,7 @@ class ScooterRestRepository implements ScooterRepository {
   ScooterRestRepository(this._client);
 
   @override
-  Future<List<ScooterMarker>> getAll() async {
+  Future<List<Scooter>> getAll() async {
     final response = await _client.get(
       _uri,
       headers: {

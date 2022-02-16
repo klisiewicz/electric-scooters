@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:escooters/src/domain/location.dart';
-import 'package:escooters/src/domain/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter.dart';
 import 'package:intl/intl.dart';
 
-class ScooterConverter extends Converter<Map<String, dynamic>, ScooterMarker> {
+class ScooterConverter extends Converter<Map<String, dynamic>, Scooter> {
   final DateFormat _dateFormat = DateFormat.yMd().add_jm();
 
   @override
-  ScooterMarker convert(Map<String, dynamic> input) {
+  Scooter convert(Map<String, dynamic> input) {
     final id = input['id'] as int;
     final name = input['name'] as String;
     final description = input['description'] as String;
@@ -19,7 +19,7 @@ class ScooterConverter extends Converter<Map<String, dynamic>, ScooterMarker> {
     final price = input['price'] as int;
     final priceTime = input['priceTime'] as int;
     final currency = input['currency'] as String;
-    return ScooterMarker(
+    return Scooter(
       id: '$id',
       name: '${int.parse(name, radix: 2).toRadixString(10)}. $description',
       location: Location(latitude: latitude, longitude: longitude),

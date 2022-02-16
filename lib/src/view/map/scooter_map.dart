@@ -1,10 +1,10 @@
-import 'package:escooters/src/domain/scooter_marker.dart';
+import 'package:escooters/src/domain/scooter.dart';
 import 'package:escooters/src/view/scooter/scooter_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ScooterMap extends StatelessWidget {
-  final List<ScooterMarker> scooters;
+  final List<Scooter> scooters;
 
   const ScooterMap({
     this.scooters = const [],
@@ -24,7 +24,7 @@ class ScooterMap extends StatelessWidget {
     );
   }
 
-  Marker _toMarker(BuildContext context, ScooterMarker scooter) {
+  Marker _toMarker(BuildContext context, Scooter scooter) {
     return Marker(
       markerId: MarkerId(scooter.id),
       position: LatLng(
@@ -38,7 +38,7 @@ class ScooterMap extends StatelessWidget {
     );
   }
 
-  void _showScooterDetails(BuildContext context, ScooterMarker scooter) {
+  void _showScooterDetails(BuildContext context, Scooter scooter) {
     showModalBottomSheet(
       context: context,
       builder: (context) => ScooterDetails(scooter),
