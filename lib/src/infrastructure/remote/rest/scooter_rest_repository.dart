@@ -30,8 +30,8 @@ class ScooterRestRepository implements ScooterRepository {
       throw Exception('Failed to load scooters');
     }
     final scootersJson = json.decode(response.body) as List<dynamic>;
-    final scooters = scootersJson
-        .map((json) => _converter.convert(json as Map<String, dynamic>));
-    return scooters.map((scooter) => ScooterMarker.from(scooter)).toList();
+    return scootersJson
+        .map((json) => _converter.convert(json as Map<String, dynamic>))
+        .toList();
   }
 }
